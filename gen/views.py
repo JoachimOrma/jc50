@@ -52,18 +52,18 @@ def index(request):
             qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_L,
-                box_size=8,
+                box_size=10,
                 border=4,
             )
             qr.add_data(qr_content)
             qr.make(fit=True)
 
             # Generate the QR code image
-            qr_image = qr.make_image(fill='gold', back_color='white')
+            qr_image = qr.make_image(fill='white', back_color='gold')
 
-            # Save the QR code image to a specific path
+            # Save the QR code image to path
             save_dir = os.path.join('gen/static/qrcode')
-            os.makedirs(save_dir, exist_ok=True)  # Create directory if it doesn't exist
+            os.makedirs(save_dir, exist_ok=True)
             save_path = os.path.join(save_dir, f'{first_name}{last_name}.png')
             qr_image.save(save_path)
 
@@ -72,11 +72,11 @@ def index(request):
             qr_image_pil.save(stream, format='PNG') 
             qr_image_data = stream.getvalue()
             qr_image_base64 = base64.b64encode(qr_image_data).decode()
-            context['qr_image_base64'] = qr_image_base64   
+            context['qr_image_base64'] = qr_image_base64  
 
 
             send_email_with_image(
-                subject='QR Code Verification.',
+                subject='QR CODE',
                 body_text=f'Dear {first_name},',
                 body_html=f'''
                     <html>

@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
 </head>
 <body>
    <div class="container-xxl hero-header">
@@ -95,10 +108,18 @@
                         "phone": $('#phone').val(),
                         "csrfmiddlewaretoken": "{{ csrf_token }}",
                     },
+                    beforeSend: function(response){
+                        $('#submitBtn').html(`
+                            <div class='d-flex align-items-center justify-content-center'>
+                                <span class='spinner-border text-light aria-hidden='true'></span>
+                                <span role='status' class="sr-only">processing...</span>
+                            </div>
+                        `)
+                    },
                     success: function(response){
                         if (response.status == 200){
                             swal({
-                                text: "Successfully registratered.",
+                                text: "Registration was successful.",
                                 icon: 'success',
                                 timer: 1500,
                                 buttons: false,
@@ -121,6 +142,7 @@
                                 buttons: false,
                             })
                         }
+                        $('#submitBtn').text("Submit");
                     },
                     error: function(error){
                         swal({
@@ -132,7 +154,7 @@
                     }
                 })
             })
-    });
+        });
    </script>
 </body>
 </html>
