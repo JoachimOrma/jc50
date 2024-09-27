@@ -61,7 +61,7 @@ def index(request):
         qr_image = qr.make_image(fill='white', back_color='gold')
 
         # Save the QR code image to path
-        save_dir = os.path.join('invitation/static/qrcode')
+        save_dir = os.path.join('gen/static/qrcode')
         os.makedirs(save_dir, exist_ok=True)
         save_path = os.path.join(save_dir, f'{splited_email}.png')
         qr_image.save(save_path)
@@ -89,7 +89,7 @@ def index(request):
             ''',
             from_email='',
             to_email=email,
-            image_path = os.path.join(settings.BASE_DIR, 'invitation', 'static', 'qrcode', f'{splited_email}.png'),
+            image_path = os.path.join(settings.BASE_DIR, 'gen', 'static', 'qrcode', f'{splited_email}.png'),
         )
         user = User(name=name, email=email, phone=phone, qr_code=qr_image_base64)
         user.save()
