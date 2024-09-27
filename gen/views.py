@@ -80,7 +80,8 @@ def index(request):
             body_html=f'''
                 <html>
                     <body>
-                        <p>We are delighted you accepted the invitation, extremely excited to have you as we celebate JC @ 50. Please find attached your Invitation QR Code.</p>
+                        <p>We are delighted you accepted the invitation, extremely excited to have you as we celebate JC @ 50.</p>
+                        <p>Please find attached your Invitation QR Code.</p>
                         <img src="cid:image1" alt="QR Code" width="300"/>
                         <p>Regards,</p>
                         <p>JC</p>
